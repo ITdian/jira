@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-export const isVoid = (value: any) => {
+export const isVoid = (value: unknown) => {
   return value === undefined || value === null || value === ''
 }
 
@@ -60,7 +60,7 @@ export const useMount = (callback: () => void) => {
 // log()
 // log()
 
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = <V> (value: V, delay?: number) => {
   const [debounceValue, setDebounceVal] = useState(value)
   useEffect(() => {
     const timer = setTimeout(() => setDebounceVal(value), delay)
