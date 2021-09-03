@@ -3,26 +3,24 @@ export const isVoid = (value: unknown) => {
   return value === undefined || value === null || value === "";
 };
 
-export const cleanObject = (object: Object) => {
+export const cleanObject = (object: { [key: string]: unknown }) => {
   if (!object) {
     return;
   }
   const result = { ...object };
   Object.keys(result).forEach((key) => {
-    // @ts-ignore
     const value = result[key];
     if (isVoid(value)) {
-      // @ts-ignore
       delete result[key];
     }
   });
   return result;
 };
-// @ts-ignore
 export const useMount = (callback: () => void) => {
-  // @ts-ignore
   useEffect(() => {
     callback();
+    // TODO 依赖项里加上callback会造成无限循环, 这个和useCallback 以及useMemo有关系
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
